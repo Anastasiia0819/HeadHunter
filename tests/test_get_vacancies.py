@@ -1,7 +1,7 @@
 import requests
 import allure
 import pytest
-from config.setting import Config
+from config.settings import Config
 
 
 @allure.suite("API вакансий")
@@ -25,12 +25,12 @@ class TestGetVacancies:
     @allure.title("Проверка структуры JSON-ответа")
     def test_get_vacancies_response_structure(self):
         response = requests.get(Config.vacancies_url)
-        data = response.json()
-        allure.attach(str(data), name="Response Body", attachment_type=allure.attachment_type.JSON)
-        assert isinstance(data.get("items"), list)
-        assert "id" in data["items"][0]
-        assert "name" in data["items"][0]
-        assert "found" in data
+        response_json = response.json()
+        allure.attach(str(response_json), name="Response Body", attachment_type=allure.attachment_type.JSON)
+        assert isinstance(response_json.get("items"), list)
+        assert "id" in response_json["items"][0]
+        assert "name" in response_json["items"][0]
+        assert "found" in response_json
 
     @allure.feature("Кластеры вакансий")
     @allure.story("Получение данных по кластерам")
@@ -39,10 +39,10 @@ class TestGetVacancies:
     def test_get_vacancies_cluster(self):
         params = {"clusters": "true"}
         response = requests.get(Config.vacancies_url, params=params)
-        data = response.json()
-        allure.attach(str(data.get("clusters")), name="Clusters", attachment_type=allure.attachment_type.JSON)
-        assert "clusters" in data
-        assert data["clusters"] is not None
+        response_json = response.json()
+        allure.attach(str(response_json.get("clusters")), name="Clusters", attachment_type=allure.attachment_type.JSON)
+        assert "clusters" in response_json
+        assert response_json["clusters"] is not None
 
     @allure.feature("Кластеры вакансий")
     @allure.story("Наличие ожидаемых кластеров")
@@ -68,11 +68,9 @@ class TestGetVacancies:
     def test_filter_by_area(self):
         params = {"area": 1}
         response = requests.get(Config.vacancies_url, params=params)
-        data = response.json()
-        allure.attach(response.text, name="Response", attachment_type=allure.attachment_type.JSON)
+        response_json = response.json()
         assert response.status_code == 200
-        for item in data["items"]:
-            allure.attach(str(item), name="Vacancy", attachment_type=allure.attachment_type.TEXT)
+        for item in response_json["items"]:
             assert "Москва" in item["area"]["name"]
 
     @allure.feature("Фильтрация вакансий")
@@ -82,10 +80,9 @@ class TestGetVacancies:
     def test_filter_by_name(self):
         params = {"per_page": 10, "search_field": "name", "text": "QA"}
         response = requests.get(Config.vacancies_url, params=params)
-        data = response.json()
-        allure.attach(response.text, name="Response", attachment_type=allure.attachment_type.JSON)
-        assert len(data["items"]) == 10
-        for vacancy in data["items"]:
+        response_json = response.json()
+        assert len(response_json["items"]) == 10
+        for vacancy in response_json["items"]:
             assert "QA" in vacancy["name"]
 
     @allure.feature("Ошибки валидации")
@@ -95,11 +92,10 @@ class TestGetVacancies:
     def test_invalid_page_number(self):
         params = {"per_page": 101}
         response = requests.get(Config.vacancies_url, params=params)
-        data = response.json()
-        allure.attach(response.text, name="Response", attachment_type=allure.attachment_type.JSON)
+        response_json = response.json()
         assert response.status_code == 400
-        assert "errors" in data
-        error = data["errors"][0]
+        assert "errors" in response_json
+        error = response_json["errors"][0]
         assert error.get("value") == "per_page"
         assert error.get("type") == "bad_argument"
 
@@ -110,6 +106,6 @@ class TestGetVacancies:
     def test_per_page_limit(self):
         params = {"per_page": 1}
         response = requests.get(Config.vacancies_url, params=params)
-        data = response.json()
+        response_json = response.json()
         allure.attach(response.text, name="Response", attachment_type=allure.attachment_type.JSON)
-        assert len(data["items"]) == 1
+        assert len(response_json["items"]) == 1

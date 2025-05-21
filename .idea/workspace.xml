@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ff18c7f-a2cf-4bcc-8a09-5458ec249303" name="Changes" comment="new" />
+    <list default="true" id="2ff18c7f-a2cf-4bcc-8a09-5458ec249303" name="Changes" comment="add  pytest.ini, requirements.txt">
+      <change beforePath="$PROJECT_DIR$/tests/test_get_vacancies.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_get_vacancies.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -176,11 +178,28 @@
       <option name="project" value="LOCAL" />
       <updated>1747820594469</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="new">
+      <option name="closed" value="true" />
+      <created>1747823311058</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1747823311058</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add  pytest.ini, requirements.txt">
+      <option name="closed" value="true" />
+      <created>1747823395847</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1747823395847</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="new" />
-    <option name="LAST_COMMIT_MESSAGE" value="new" />
+    <MESSAGE value="add  pytest.ini, requirements.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="add  pytest.ini, requirements.txt" />
   </component>
 </project>
