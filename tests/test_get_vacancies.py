@@ -96,8 +96,9 @@ class TestGetVacancies:
         assert response.status_code == 400
         assert "errors" in response_json
         error = response_json["errors"][0]
-        assert error.get("value") == "per_page"
-        assert error.get("type") == "bad_argument"
+        with allure.step("Проверка значения ошибки"):
+            assert error.get("value") == "per_page"
+            assert error.get("type") == "bad_argument"
 
     @allure.feature("Ограничение количества результатов")
     @allure.story("Проверка per_page=1")
