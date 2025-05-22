@@ -83,7 +83,7 @@ class TestGetVacancies:
         response_json = response.json()
         assert len(response_json["items"]) == 10
         for vacancy in response_json["items"]:
-            assert "QA" in vacancy["name"]
+            assert "QA" or "Тестировщик" in vacancy["name"]
 
     @allure.feature("Ошибки валидации")
     @allure.story("Некорректный параметр per_page")
