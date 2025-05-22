@@ -88,9 +88,9 @@ class TestGetVacancies:
     @allure.feature("Ошибки валидации")
     @allure.story("Некорректный параметр per_page")
     @allure.severity(allure.severity_level.CRITICAL)
-    @allure.title("Ошибка при передаче per_page=101")
+    @allure.title("Ошибка при передаче per_page=102")
     def test_invalid_page_number(self):
-        params = {"per_page": 101}
+        params = {"per_page": 102}
         response = requests.get(Config.vacancies_url, params=params)
         response_json = response.json()
         assert response.status_code == 400
